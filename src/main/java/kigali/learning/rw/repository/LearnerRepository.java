@@ -1,0 +1,17 @@
+package kigali.learning.rw.repository;
+
+import java.util.UUID;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import kigali.learning.rw.domain.Learner;
+
+@Repository
+public interface LearnerRepository extends JpaRepository<Learner, UUID> {
+
+    boolean existsByLearnerNumber(String learnerNumber);
+
+    boolean existsByLearnerNumberAndIdNot(String learnerNumber, UUID id);
+
+}
