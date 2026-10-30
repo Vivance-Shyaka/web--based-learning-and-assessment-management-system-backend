@@ -121,7 +121,7 @@ public class InstructorService {
         return "Instructor deleted successfully";
     }
 
-  
+
     private String validate(Instructor instructor) {
         if (instructor.getFirstName() == null || instructor.getFirstName().isBlank()) {
             return "Instructor first name is required";
@@ -133,5 +133,10 @@ public class InstructorService {
             return "Instructor email is not valid";
         }
         return null;
+    }
+
+  
+    public List<Instructor> getInstructorsByTopic(String name) {
+        return instructorRepository.findInstructorsByTopicName(name);
     }
 }

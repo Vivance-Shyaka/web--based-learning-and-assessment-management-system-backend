@@ -13,9 +13,9 @@ import kigali.learning.rw.domain.QuizAttempt;
 @Repository
 public interface QuizAttemptRepository extends JpaRepository<QuizAttempt, UUID> {
 
-   
+  
     List<QuizAttempt> findByStatusOrderByAttemptDateAsc(AttemptStatus status);
 
-   
+
     List<QuizAttempt> findByAttemptDateBetweenOrderByAttemptDateAsc(LocalDate start, LocalDate end);
 }

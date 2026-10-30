@@ -78,13 +78,13 @@ public class QuizAttemptController {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
-    // B2
+    
     @GetMapping("/by-status")
     public ResponseEntity<List<QuizAttempt>> getQuizAttemptsByStatus(@RequestParam AttemptStatus status) {
         return new ResponseEntity<>(quizAttemptService.getQuizAttemptsByStatus(status), HttpStatus.OK);
     }
 
-   
+  
     @GetMapping("/between")
     public ResponseEntity<List<QuizAttempt>> getQuizAttemptsBetween(
             @RequestParam String start, @RequestParam String end) {

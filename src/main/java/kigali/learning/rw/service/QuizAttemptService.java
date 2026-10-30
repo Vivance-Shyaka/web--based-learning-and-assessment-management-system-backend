@@ -104,8 +104,7 @@ public class QuizAttemptService {
         return "Quiz attempt deleted successfully";
     }
 
-    // Returns a message when the data is not acceptable, or null when it is fine.
-    // The date is NOT checked against today here: that rule belongs to D1.
+  
     private String validate(QuizAttempt quizAttempt) {
         if (quizAttempt.getAttemptDate() == null) {
             return "Quiz attempt date is required";
@@ -119,12 +118,12 @@ public class QuizAttemptService {
         return null;
     }
 
-    // B2
+   
     public List<QuizAttempt> getQuizAttemptsByStatus(AttemptStatus status) {
         return quizAttemptRepository.findByStatusOrderByAttemptDateAsc(status);
     }
 
-    // B3
+   
     public List<QuizAttempt> getQuizAttemptsBetween(LocalDate start, LocalDate end) {
         return quizAttemptRepository.findByAttemptDateBetweenOrderByAttemptDateAsc(start, end);
     }

@@ -75,11 +75,15 @@ public class TopicService {
         return "Topic deleted successfully";
     }
 
-    // Returns a message when the data is not acceptable, or null when it is fine.
     private String validate(Topic topic) {
         if (topic.getName() == null || topic.getName().isBlank()) {
             return "Topic name is required";
         }
         return null;
+    }
+
+
+    public List<Topic> getUnusedTopics() {
+        return topicRepository.findUnusedTopics();
     }
 }

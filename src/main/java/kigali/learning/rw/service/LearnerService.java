@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import kigali.learning.rw.domain.Learner;
+import kigali.learning.rw.repository.InstructorRepository;
 import kigali.learning.rw.repository.LearnerRepository;
 
 @Service
@@ -15,9 +16,11 @@ public class LearnerService {
     private static final String EMAIL_PATTERN = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$";
 
     private final LearnerRepository learnerRepository;
+    private final InstructorRepository instructorRepository;
 
-    public LearnerService(LearnerRepository learnerRepository) {
+    public LearnerService(LearnerRepository learnerRepository, InstructorRepository instructorRepository) {
         this.learnerRepository = learnerRepository;
+        this.instructorRepository = instructorRepository;
     }
 
     public String saveLearner(Learner learner) {
@@ -100,8 +103,16 @@ public class LearnerService {
         return null;
     }
 
-    // B1
+  
     public List<Learner> getLearnersByLastName(String lastName) {
         return learnerRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
+    }
+
+
+    public Optional<List<Learner>> getLearnersOfInstructor(UUID instructorId) {
+        if (instructorRepository.findById(instructorId).isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(learnerRepository.findLearnersOfInstructor(instructorId));
     }
 }

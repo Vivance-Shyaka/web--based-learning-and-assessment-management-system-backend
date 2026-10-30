@@ -84,4 +84,14 @@ public class LearnerController {
     public ResponseEntity<List<Learner>> getLearnersByLastName(@RequestParam String lastName) {
         return new ResponseEntity<>(learnerService.getLearnersByLastName(lastName), HttpStatus.OK);
     }
+
+  
+    @GetMapping("/of-instructor/{instructorId}")
+    public ResponseEntity<?> getLearnersOfInstructor(@PathVariable UUID instructorId) {
+        Optional<List<Learner>> learners = learnerService.getLearnersOfInstructor(instructorId);
+        if (learners.isPresent()) {
+            return new ResponseEntity<>(learners.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>("The instructor with that id does not exist", HttpStatus.NOT_FOUND);
+    }
 }

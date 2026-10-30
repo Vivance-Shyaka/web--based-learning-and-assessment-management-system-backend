@@ -77,4 +77,10 @@ public class TopicController {
         }
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
+
+   
+    @GetMapping("/unused")
+    public ResponseEntity<List<Topic>> getUnusedTopics() {
+        return new ResponseEntity<>(topicService.getUnusedTopics(), HttpStatus.OK);
+    }
 }

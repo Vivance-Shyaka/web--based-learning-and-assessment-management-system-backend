@@ -75,7 +75,7 @@ public class CourseService {
         return "Course deleted successfully";
     }
 
-    
+
     private String validate(Course course) {
         if (course.getCourseNumber() <= 0) {
             return "Course number must be greater than zero";
@@ -84,5 +84,10 @@ public class CourseService {
             return "Course name is required";
         }
         return null;
+    }
+
+
+    public List<Course> getFreeCourses() {
+        return courseRepository.findFreeCourses();
     }
 }
