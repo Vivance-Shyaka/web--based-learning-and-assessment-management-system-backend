@@ -79,7 +79,7 @@ public class LearnerController {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
-  
+   
     @GetMapping("/by-last-name")
     public ResponseEntity<List<Learner>> getLearnersByLastName(@RequestParam String lastName) {
         return new ResponseEntity<>(learnerService.getLearnersByLastName(lastName), HttpStatus.OK);

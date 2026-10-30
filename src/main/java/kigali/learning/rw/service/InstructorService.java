@@ -121,7 +121,7 @@ public class InstructorService {
         return "Instructor deleted successfully";
     }
 
-
+  
     private String validate(Instructor instructor) {
         if (instructor.getFirstName() == null || instructor.getFirstName().isBlank()) {
             return "Instructor first name is required";
@@ -138,5 +138,53 @@ public class InstructorService {
   
     public List<Instructor> getInstructorsByTopic(String name) {
         return instructorRepository.findInstructorsByTopicName(name);
+    }
+
+  
+    @Transactional
+    public String addTopicToInstructor(UUID instructorId, UUID topicId) {
+        Optional<Instructor> existingInstructor = instructorRepository.findById(instructorId);
+        if (existingInstructor.isEmpty()) {
+            return "The instructor with that id does not exist";
+        }
+
+        Optional<Topic> existingTopic = topicRepository.findById(topicId);
+        if (existingTopic.isEmpty()) {
+            return "That topic does not exist";
+        }
+
+        Instructor instructor = existingInstructor.get();
+        Topic topic = existingTopic.get();
+        if (instructor.getTopics().contains(topic)) {
+            return "The instructor already has that topic";
+        }
+
+        instructor.getTopics().add(topic);
+        instructorRepository.save(instructor);
+        return "Topic added to the instructor";
+    }
+
+   
+    @Transactional
+    public String changeInstructorCourse(UUID instructorId, int courseNumber) {
+        Optional<Instructor> existingInstructor = instructorRepository.findById(instructorId);
+        if (existingInstructor.isEmpty()) {
+            return "The instructor with that id does not exist";
+        }
+
+        Optional<Course> existingCourse = courseRepository.findByCourseNumber(courseNumber);
+        if (existingCourse.isEmpty()) {
+            return "The course with that courseNumber does not exist";
+        }
+
+        Course course = existingCourse.get();
+        if (instructorRepository.existsByCourseAndIdNot(course, instructorId)) {
+            return "That course is taken by another instructor";
+        }
+
+        Instructor instructor = existingInstructor.get();
+        instructor.setCourse(course);
+        instructorRepository.save(instructor);
+        return "Course changed successfully";
     }
 }

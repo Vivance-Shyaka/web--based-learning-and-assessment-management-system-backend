@@ -39,6 +39,11 @@ public class QuizAttemptService {
             return problem;
         }
 
+      
+        if (quizAttempt.getAttemptDate().isBefore(LocalDate.now())) {
+            return "Quiz attempt date cannot be in the past";
+        }
+
         if (quizAttempt.getLearner() == null || quizAttempt.getLearner().getId() == null) {
             return "The learner with that id does not exist";
         }
@@ -56,9 +61,15 @@ public class QuizAttemptService {
             return "The instructor with that id does not exist";
         }
 
+       
+        if (quizAttemptRepository.existsByInstructorAndAttemptDateAndStatusNot(
+                requestedInstructor.get(), quizAttempt.getAttemptDate(), AttemptStatus.ABANDONED)) {
+            return "Instructor already grades an attempt on that date";
+        }
+
         QuizAttempt newQuizAttempt = new QuizAttempt();
         newQuizAttempt.setAttemptDate(quizAttempt.getAttemptDate());
-        newQuizAttempt.setStatus(quizAttempt.getStatus());
+        newQuizAttempt.setStatus(AttemptStatus.STARTED);
         newQuizAttempt.setQuizTitle(quizAttempt.getQuizTitle().trim());
         newQuizAttempt.setTotalQuestions(quizAttempt.getTotalQuestions());
         newQuizAttempt.setLearner(requestedLearner.get());
@@ -104,7 +115,7 @@ public class QuizAttemptService {
         return "Quiz attempt deleted successfully";
     }
 
-  
+   
     private String validate(QuizAttempt quizAttempt) {
         if (quizAttempt.getAttemptDate() == null) {
             return "Quiz attempt date is required";
@@ -126,5 +137,31 @@ public class QuizAttemptService {
    
     public List<QuizAttempt> getQuizAttemptsBetween(LocalDate start, LocalDate end) {
         return quizAttemptRepository.findByAttemptDateBetweenOrderByAttemptDateAsc(start, end);
+    }
+
+  
+    public String updateQuizAttemptStatus(UUID id, AttemptStatus newStatus) {
+        Optional<QuizAttempt> existingQuizAttempt = quizAttemptRepository.findById(id);
+        if (existingQuizAttempt.isEmpty()) {
+            return "The quiz attempt with that id does not exist";
+        }
+
+        QuizAttempt quizAttempt = existingQuizAttempt.get();
+        AttemptStatus currentStatus = quizAttempt.getStatus();
+
+        boolean allowed = false;
+        if (currentStatus == AttemptStatus.STARTED) {
+            allowed = newStatus == AttemptStatus.SUBMITTED || newStatus == AttemptStatus.ABANDONED;
+        } else if (currentStatus == AttemptStatus.SUBMITTED) {
+            allowed = newStatus == AttemptStatus.GRADED || newStatus == AttemptStatus.ABANDONED;
+        }
+
+        if (!allowed) {
+            return "Cannot change status from " + currentStatus + " to " + newStatus;
+        }
+
+        quizAttempt.setStatus(newStatus);
+        quizAttemptRepository.save(quizAttempt);
+        return "Quiz attempt status updated successfully";
     }
 }

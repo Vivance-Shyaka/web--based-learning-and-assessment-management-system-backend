@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -82,9 +83,37 @@ public class InstructorController {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
-  
+   
     @GetMapping("/by-topic")
     public ResponseEntity<List<Instructor>> getInstructorsByTopic(@RequestParam String name) {
         return new ResponseEntity<>(instructorService.getInstructorsByTopic(name), HttpStatus.OK);
+    }
+
+   
+    @PutMapping("/{instructorId}/topics/{topicId}")
+    public ResponseEntity<String> addTopicToInstructor(
+            @PathVariable UUID instructorId, @PathVariable UUID topicId) {
+        String message = instructorService.addTopicToInstructor(instructorId, topicId);
+        if ("Topic added to the instructor".equals(message)) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+        if ("The instructor already has that topic".equals(message)) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
+
+  
+    @PatchMapping("/{instructorId}/course")
+    public ResponseEntity<String> changeInstructorCourse(
+            @PathVariable UUID instructorId, @RequestParam int courseNumber) {
+        String message = instructorService.changeInstructorCourse(instructorId, courseNumber);
+        if ("Course changed successfully".equals(message)) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+        if ("That course is taken by another instructor".equals(message)) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 }

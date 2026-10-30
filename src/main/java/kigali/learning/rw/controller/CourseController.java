@@ -78,7 +78,7 @@ public class CourseController {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
-   
+  
     @GetMapping("/free")
     public ResponseEntity<List<Course>> getFreeCourses() {
         return new ResponseEntity<>(courseService.getFreeCourses(), HttpStatus.OK);

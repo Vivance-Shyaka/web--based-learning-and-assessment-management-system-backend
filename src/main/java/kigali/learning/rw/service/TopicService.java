@@ -75,6 +75,7 @@ public class TopicService {
         return "Topic deleted successfully";
     }
 
+
     private String validate(Topic topic) {
         if (topic.getName() == null || topic.getName().isBlank()) {
             return "Topic name is required";

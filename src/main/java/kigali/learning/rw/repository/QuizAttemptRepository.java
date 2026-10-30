@@ -8,14 +8,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import kigali.learning.rw.domain.AttemptStatus;
+import kigali.learning.rw.domain.Instructor;
 import kigali.learning.rw.domain.QuizAttempt;
 
 @Repository
 public interface QuizAttemptRepository extends JpaRepository<QuizAttempt, UUID> {
 
-  
+   
     List<QuizAttempt> findByStatusOrderByAttemptDateAsc(AttemptStatus status);
 
-
+  
     List<QuizAttempt> findByAttemptDateBetweenOrderByAttemptDateAsc(LocalDate start, LocalDate end);
+
+ 
+    boolean existsByInstructorAndAttemptDateAndStatusNot(
+            Instructor instructor, LocalDate attemptDate, AttemptStatus status);
 }

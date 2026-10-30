@@ -17,10 +17,10 @@ public interface LearnerRepository extends JpaRepository<Learner, UUID> {
 
     boolean existsByLearnerNumberAndIdNot(String learnerNumber, UUID id);
 
-    
+   
     List<Learner> findByLastNameIgnoreCaseOrderByFirstNameAsc(String lastName);
 
-
+   
     @Query("SELECT DISTINCT a.learner FROM QuizAttempt a WHERE a.instructor.id = :instructorId")
     List<Learner> findLearnersOfInstructor(@Param("instructorId") UUID instructorId);
 }

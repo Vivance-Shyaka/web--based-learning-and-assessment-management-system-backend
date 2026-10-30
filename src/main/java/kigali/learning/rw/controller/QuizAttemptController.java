@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -36,6 +37,9 @@ public class QuizAttemptController {
         String message = quizAttemptService.saveQuizAttempt(quizAttempt);
         if ("Quiz attempt saved successfully".equals(message)) {
             return new ResponseEntity<>(message, HttpStatus.CREATED);
+        }
+        if ("Instructor already grades an attempt on that date".equals(message)) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
         }
         if (message.endsWith("does not exist")) {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
@@ -78,7 +82,7 @@ public class QuizAttemptController {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
-    
+  
     @GetMapping("/by-status")
     public ResponseEntity<List<QuizAttempt>> getQuizAttemptsByStatus(@RequestParam AttemptStatus status) {
         return new ResponseEntity<>(quizAttemptService.getQuizAttemptsByStatus(status), HttpStatus.OK);
@@ -91,5 +95,19 @@ public class QuizAttemptController {
         LocalDate startDate = LocalDate.parse(start);
         LocalDate endDate = LocalDate.parse(end);
         return new ResponseEntity<>(quizAttemptService.getQuizAttemptsBetween(startDate, endDate), HttpStatus.OK);
+    }
+
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<String> updateQuizAttemptStatus(
+            @PathVariable UUID id, @RequestParam AttemptStatus status) {
+        String message = quizAttemptService.updateQuizAttemptStatus(id, status);
+        if ("Quiz attempt status updated successfully".equals(message)) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+        if ("The quiz attempt with that id does not exist".equals(message)) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 }
