@@ -75,7 +75,7 @@ public class CourseService {
         return "Course deleted successfully";
     }
 
-    // It have to Reply a message niba data ushyizemo bidakunze
+    
     private String validate(Course course) {
         if (course.getCourseNumber() <= 0) {
             return "Course number must be greater than zero";

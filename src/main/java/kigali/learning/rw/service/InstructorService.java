@@ -120,7 +120,8 @@ public class InstructorService {
         instructorRepository.deleteById(id);
         return "Instructor deleted successfully";
     }
- //also heere you have to return a messge  if data is not correct 
+
+  
     private String validate(Instructor instructor) {
         if (instructor.getFirstName() == null || instructor.getFirstName().isBlank()) {
             return "Instructor first name is required";

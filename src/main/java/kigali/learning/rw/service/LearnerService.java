@@ -83,7 +83,7 @@ public class LearnerService {
         return "Learner deleted successfully";
     }
 
-    
+
     private String validate(Learner learner) {
         if (learner.getFirstName() == null || learner.getFirstName().isBlank()) {
             return "Learner first name is required";
@@ -98,5 +98,10 @@ public class LearnerService {
             return "Learner email is not valid";
         }
         return null;
+    }
+
+    // B1
+    public List<Learner> getLearnersByLastName(String lastName) {
+        return learnerRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
     }
 }

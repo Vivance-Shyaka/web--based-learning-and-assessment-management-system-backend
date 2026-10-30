@@ -1,5 +1,6 @@
 package kigali.learning.rw.repository;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,5 @@ public interface LearnerRepository extends JpaRepository<Learner, UUID> {
 
     boolean existsByLearnerNumberAndIdNot(String learnerNumber, UUID id);
 
+    List<Learner> findByLastNameIgnoreCaseOrderByFirstNameAsc(String lastName);
 }

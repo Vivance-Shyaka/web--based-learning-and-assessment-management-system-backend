@@ -1,5 +1,6 @@
 package kigali.learning.rw.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -7,6 +8,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kigali.learning.rw.domain.AttemptStatus;
 import kigali.learning.rw.domain.Instructor;
 import kigali.learning.rw.domain.Learner;
 import kigali.learning.rw.domain.QuizAttempt;
@@ -102,8 +104,8 @@ public class QuizAttemptService {
         return "Quiz attempt deleted successfully";
     }
 
-   
-    // Here the date is NOT checked against today here. so iyi ni validation
+    // Returns a message when the data is not acceptable, or null when it is fine.
+    // The date is NOT checked against today here: that rule belongs to D1.
     private String validate(QuizAttempt quizAttempt) {
         if (quizAttempt.getAttemptDate() == null) {
             return "Quiz attempt date is required";
@@ -115,5 +117,15 @@ public class QuizAttemptService {
             return "Total questions must be greater than zero";
         }
         return null;
+    }
+
+    // B2
+    public List<QuizAttempt> getQuizAttemptsByStatus(AttemptStatus status) {
+        return quizAttemptRepository.findByStatusOrderByAttemptDateAsc(status);
+    }
+
+    // B3
+    public List<QuizAttempt> getQuizAttemptsBetween(LocalDate start, LocalDate end) {
+        return quizAttemptRepository.findByAttemptDateBetweenOrderByAttemptDateAsc(start, end);
     }
 }
