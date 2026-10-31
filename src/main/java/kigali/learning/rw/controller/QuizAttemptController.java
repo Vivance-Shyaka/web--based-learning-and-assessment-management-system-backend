@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -114,13 +117,13 @@ public class QuizAttemptController {
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
-
+    // F1
     @GetMapping("/stats/by-status")
     public ResponseEntity<List<Object[]>> getQuizAttemptCountsByStatus() {
         return new ResponseEntity<>(quizAttemptService.getQuizAttemptCountsByStatus(), HttpStatus.OK);
     }
 
-  
+    // F2
     @PatchMapping("/cancel-day")
     public ResponseEntity<String> cancelDayOfInstructor(
             @RequestParam UUID instructorId, @RequestParam String date) {
@@ -130,5 +133,25 @@ public class QuizAttemptController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+   
+    @GetMapping("/page")
+    public ResponseEntity<?> getQuizAttemptsPage(
+            @RequestParam int page, @RequestParam int size, @RequestParam String sort) {
+        if (page < 0 || size < 1) {
+            return new ResponseEntity<>("Page must be 0 or more and size must be at least 1",
+                    HttpStatus.BAD_REQUEST);
+        }
+
+
+        String[] sortParts = sort.split(",");
+        Sort.Direction direction = Sort.Direction.ASC;
+        if (sortParts.length > 1 && sortParts[1].equalsIgnoreCase("desc")) {
+            direction = Sort.Direction.DESC;
+        }
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortParts[0]));
+        return new ResponseEntity<>(quizAttemptService.getQuizAttemptsPage(pageable), HttpStatus.OK);
     }
 }

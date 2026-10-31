@@ -17,20 +17,22 @@ import kigali.learning.rw.domain.QuizAttempt;
 @Repository
 public interface QuizAttemptRepository extends JpaRepository<QuizAttempt, UUID> {
 
-  
+    // B2: DERIVED query (enum parameter + OrderBy)
     List<QuizAttempt> findByStatusOrderByAttemptDateAsc(AttemptStatus status);
 
-  
+    // B3: DERIVED query (Between, both dates included, + OrderBy)
     List<QuizAttempt> findByAttemptDateBetweenOrderByAttemptDateAsc(LocalDate start, LocalDate end);
 
+    // D1: DERIVED query (existsBy + And + Not): does this instructor already have an
+    // attempt on that date whose status is NOT the given one (ABANDONED)?
     boolean existsByInstructorAndAttemptDateAndStatusNot(
             Instructor instructor, LocalDate attemptDate, AttemptStatus status);
 
-  
+    // F1: JPQL, GROUP BY + COUNT. One row per status that has at least one attempt.
     @Query("SELECT a.status, COUNT(a) FROM QuizAttempt a GROUP BY a.status")
     List<Object[]> countQuizAttemptsByStatus();
 
-   
+    // F2: JPQL bulk UPDATE, one query and no Java loop. Returns how many rows were changed.
     @Modifying
     @Query("UPDATE QuizAttempt a SET a.status = :newStatus "
             + "WHERE a.instructor.id = :instructorId "
@@ -41,4 +43,9 @@ public interface QuizAttemptRepository extends JpaRepository<QuizAttempt, UUID> 
             @Param("date") LocalDate date,
             @Param("newStatus") AttemptStatus newStatus,
             @Param("keepStatus") AttemptStatus keepStatus);
+
+    // Bonus dashboard: DERIVED countBy queries
+    long countByAttemptDate(LocalDate attemptDate);
+
+    long countByStatus(AttemptStatus status);
 }

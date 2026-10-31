@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -115,6 +117,7 @@ public class QuizAttemptService {
             return "The quiz attempt with that id does not exist";
         }
 
+        // E3: a quiz attempt that has result feedbacks cannot be deleted
         if (resultFeedbackRepository.existsByQuizAttempt(existingQuizAttempt.get())) {
             return "That quiz attempt has result feedbacks, delete them first";
         }
@@ -123,7 +126,8 @@ public class QuizAttemptService {
         return "Quiz attempt deleted successfully";
     }
 
-   
+    // Returns a message when the data is not acceptable, or null when it is fine.
+    // The 'date not in the past' rule is checked in saveQuizAttempt (D1), not here.
     private String validate(QuizAttempt quizAttempt) {
         if (quizAttempt.getAttemptDate() == null) {
             return "Quiz attempt date is required";
@@ -147,7 +151,7 @@ public class QuizAttemptService {
         return quizAttemptRepository.findByAttemptDateBetweenOrderByAttemptDateAsc(start, end);
     }
 
-   
+    // D2: status flow  STARTED -> SUBMITTED or ABANDONED, SUBMITTED -> GRADED or ABANDONED
     public String updateQuizAttemptStatus(UUID id, AttemptStatus newStatus) {
         Optional<QuizAttempt> existingQuizAttempt = quizAttemptRepository.findById(id);
         if (existingQuizAttempt.isEmpty()) {
@@ -178,7 +182,8 @@ public class QuizAttemptService {
         return quizAttemptRepository.countQuizAttemptsByStatus();
     }
 
-  
+    // F2: the instructor is absent, so every attempt of that day becomes ABANDONED,
+    // except the ones that are already GRADED. @Transactional is required for UPDATE queries.
     @Transactional
     public String cancelDayOfInstructor(UUID instructorId, LocalDate date) {
         if (instructorRepository.findById(instructorId).isEmpty()) {
@@ -188,5 +193,10 @@ public class QuizAttemptService {
         int cancelled = quizAttemptRepository.cancelQuizAttemptsOfDay(
                 instructorId, date, AttemptStatus.ABANDONED, AttemptStatus.GRADED);
         return cancelled + " quiz attempts cancelled";
+    }
+
+    // Bonus: quiz attempts page by page
+    public Page<QuizAttempt> getQuizAttemptsPage(Pageable pageable) {
+        return quizAttemptRepository.findAll(pageable);
     }
 }
