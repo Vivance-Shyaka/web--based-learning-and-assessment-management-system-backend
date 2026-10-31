@@ -75,7 +75,7 @@ public class CourseService {
         return "Course deleted successfully";
     }
 
-    // Returns a message when the data is not acceptable, or null when it is fine.
+   
     private String validate(Course course) {
         if (course.getCourseNumber() <= 0) {
             return "Course number must be greater than zero";

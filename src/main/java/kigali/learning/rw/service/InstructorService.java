@@ -164,7 +164,7 @@ public class InstructorService {
         return "Topic added to the instructor";
     }
 
-    // D4: move the instructor to another course
+  
     @Transactional
     public String changeInstructorCourse(UUID instructorId, int courseNumber) {
         Optional<Instructor> existingInstructor = instructorRepository.findById(instructorId);

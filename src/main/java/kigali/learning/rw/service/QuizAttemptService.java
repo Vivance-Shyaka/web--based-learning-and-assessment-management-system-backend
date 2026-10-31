@@ -115,7 +115,6 @@ public class QuizAttemptService {
             return "The quiz attempt with that id does not exist";
         }
 
-        // E3: a quiz attempt that has result feedbacks cannot be deleted
         if (resultFeedbackRepository.existsByQuizAttempt(existingQuizAttempt.get())) {
             return "That quiz attempt has result feedbacks, delete them first";
         }
@@ -124,8 +123,7 @@ public class QuizAttemptService {
         return "Quiz attempt deleted successfully";
     }
 
-    // Returns a message when the data is not acceptable, or null when it is fine.
-    // The 'date not in the past' rule is checked in saveQuizAttempt (D1), not here.
+   
     private String validate(QuizAttempt quizAttempt) {
         if (quizAttempt.getAttemptDate() == null) {
             return "Quiz attempt date is required";
@@ -149,7 +147,7 @@ public class QuizAttemptService {
         return quizAttemptRepository.findByAttemptDateBetweenOrderByAttemptDateAsc(start, end);
     }
 
-    // D2: status flow  STARTED -> SUBMITTED or ABANDONED, SUBMITTED -> GRADED or ABANDONED
+   
     public String updateQuizAttemptStatus(UUID id, AttemptStatus newStatus) {
         Optional<QuizAttempt> existingQuizAttempt = quizAttemptRepository.findById(id);
         if (existingQuizAttempt.isEmpty()) {
@@ -173,5 +171,22 @@ public class QuizAttemptService {
         quizAttempt.setStatus(newStatus);
         quizAttemptRepository.save(quizAttempt);
         return "Quiz attempt status updated successfully";
+    }
+
+    // F1
+    public List<Object[]> getQuizAttemptCountsByStatus() {
+        return quizAttemptRepository.countQuizAttemptsByStatus();
+    }
+
+  
+    @Transactional
+    public String cancelDayOfInstructor(UUID instructorId, LocalDate date) {
+        if (instructorRepository.findById(instructorId).isEmpty()) {
+            return "The instructor with that id does not exist";
+        }
+
+        int cancelled = quizAttemptRepository.cancelQuizAttemptsOfDay(
+                instructorId, date, AttemptStatus.ABANDONED, AttemptStatus.GRADED);
+        return cancelled + " quiz attempts cancelled";
     }
 }

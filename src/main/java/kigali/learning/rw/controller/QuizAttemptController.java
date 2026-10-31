@@ -100,7 +100,7 @@ public class QuizAttemptController {
         return new ResponseEntity<>(quizAttemptService.getQuizAttemptsBetween(startDate, endDate), HttpStatus.OK);
     }
 
-
+    // D2
     @PatchMapping("/{id}/status")
     public ResponseEntity<String> updateQuizAttemptStatus(
             @PathVariable UUID id, @RequestParam AttemptStatus status) {
@@ -112,5 +112,23 @@ public class QuizAttemptController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @GetMapping("/stats/by-status")
+    public ResponseEntity<List<Object[]>> getQuizAttemptCountsByStatus() {
+        return new ResponseEntity<>(quizAttemptService.getQuizAttemptCountsByStatus(), HttpStatus.OK);
+    }
+
+  
+    @PatchMapping("/cancel-day")
+    public ResponseEntity<String> cancelDayOfInstructor(
+            @RequestParam UUID instructorId, @RequestParam String date) {
+        LocalDate day = LocalDate.parse(date);
+        String message = quizAttemptService.cancelDayOfInstructor(instructorId, day);
+        if (message.endsWith("does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

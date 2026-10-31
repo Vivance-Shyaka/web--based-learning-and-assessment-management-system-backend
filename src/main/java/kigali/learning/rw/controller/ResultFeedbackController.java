@@ -27,6 +27,7 @@ public class ResultFeedbackController {
         this.resultFeedbackService = resultFeedbackService;
     }
 
+    // E1
     @PostMapping("/save")
     public ResponseEntity<String> saveResultFeedback(
             @RequestParam UUID quizAttemptId, @RequestBody ResultFeedback resultFeedback) {
@@ -40,7 +41,7 @@ public class ResultFeedbackController {
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
-  
+    // E2
     @GetMapping("/learner/{learnerNumber}")
     public ResponseEntity<List<ResultFeedback>> getResultFeedbacksOfLearner(
             @PathVariable String learnerNumber) {
@@ -48,7 +49,7 @@ public class ResultFeedbackController {
                 resultFeedbackService.getResultFeedbacksOfLearner(learnerNumber), HttpStatus.OK);
     }
 
-  
+    // E3
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteResultFeedback(@PathVariable UUID id) {
         String message = resultFeedbackService.deleteResultFeedback(id);
