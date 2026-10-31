@@ -18,10 +18,10 @@ public interface InstructorRepository extends JpaRepository<Instructor, UUID> {
 
     boolean existsByEmailIgnoreCaseAndIdNot(String email, UUID id);
 
-  
+    // C1: JPQL, JOIN on the topics collection + LOWER
     @Query("SELECT i FROM Instructor i JOIN i.topics t WHERE LOWER(t.name) = LOWER(:name)")
     List<Instructor> findInstructorsByTopicName(@Param("name") String name);
 
-
+    // D4: DERIVED query: does another instructor (not this id) already hold that course?
     boolean existsByCourseAndIdNot(Course course, UUID id);
 }

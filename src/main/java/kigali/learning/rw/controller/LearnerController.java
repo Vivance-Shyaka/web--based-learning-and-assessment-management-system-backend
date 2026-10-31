@@ -79,13 +79,13 @@ public class LearnerController {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
-   
+    // B1
     @GetMapping("/by-last-name")
     public ResponseEntity<List<Learner>> getLearnersByLastName(@RequestParam String lastName) {
         return new ResponseEntity<>(learnerService.getLearnersByLastName(lastName), HttpStatus.OK);
     }
 
-  
+    // C4
     @GetMapping("/of-instructor/{instructorId}")
     public ResponseEntity<?> getLearnersOfInstructor(@PathVariable UUID instructorId) {
         Optional<List<Learner>> learners = learnerService.getLearnersOfInstructor(instructorId);

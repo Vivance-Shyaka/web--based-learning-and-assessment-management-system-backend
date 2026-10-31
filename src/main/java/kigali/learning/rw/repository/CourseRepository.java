@@ -18,11 +18,11 @@ public interface CourseRepository extends JpaRepository<Course, UUID> {
 
     boolean existsByCourseNumberAndIdNot(int courseNumber, UUID id);
 
-    
+    // C2: JPQL, NOT EXISTS subquery
     @Query("SELECT c FROM Course c WHERE NOT EXISTS "
             + "(SELECT i FROM Instructor i WHERE i.course = c) ORDER BY c.courseNumber")
     List<Course> findFreeCourses();
 
-
+    // D4: DERIVED query
     Optional<Course> findByCourseNumber(int courseNumber);
 }

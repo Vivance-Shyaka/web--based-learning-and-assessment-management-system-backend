@@ -83,13 +83,13 @@ public class InstructorController {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
-   
+    // C1
     @GetMapping("/by-topic")
     public ResponseEntity<List<Instructor>> getInstructorsByTopic(@RequestParam String name) {
         return new ResponseEntity<>(instructorService.getInstructorsByTopic(name), HttpStatus.OK);
     }
 
-   
+    // D3
     @PutMapping("/{instructorId}/topics/{topicId}")
     public ResponseEntity<String> addTopicToInstructor(
             @PathVariable UUID instructorId, @PathVariable UUID topicId) {
@@ -103,7 +103,7 @@ public class InstructorController {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
-  
+    // D4
     @PatchMapping("/{instructorId}/course")
     public ResponseEntity<String> changeInstructorCourse(
             @PathVariable UUID instructorId, @RequestParam int courseNumber) {

@@ -15,6 +15,7 @@ import kigali.learning.rw.domain.QuizAttempt;
 import kigali.learning.rw.repository.InstructorRepository;
 import kigali.learning.rw.repository.LearnerRepository;
 import kigali.learning.rw.repository.QuizAttemptRepository;
+import kigali.learning.rw.repository.ResultFeedbackRepository;
 
 @Service
 public class QuizAttemptService {
@@ -22,14 +23,17 @@ public class QuizAttemptService {
     private final QuizAttemptRepository quizAttemptRepository;
     private final LearnerRepository learnerRepository;
     private final InstructorRepository instructorRepository;
+    private final ResultFeedbackRepository resultFeedbackRepository;
 
     public QuizAttemptService(
             QuizAttemptRepository quizAttemptRepository,
             LearnerRepository learnerRepository,
-            InstructorRepository instructorRepository) {
+            InstructorRepository instructorRepository,
+            ResultFeedbackRepository resultFeedbackRepository) {
         this.quizAttemptRepository = quizAttemptRepository;
         this.learnerRepository = learnerRepository;
         this.instructorRepository = instructorRepository;
+        this.resultFeedbackRepository = resultFeedbackRepository;
     }
 
     @Transactional
@@ -39,7 +43,7 @@ public class QuizAttemptService {
             return problem;
         }
 
-      
+        // D1: a quiz attempt cannot be created for a day that has already passed
         if (quizAttempt.getAttemptDate().isBefore(LocalDate.now())) {
             return "Quiz attempt date cannot be in the past";
         }
@@ -61,7 +65,7 @@ public class QuizAttemptService {
             return "The instructor with that id does not exist";
         }
 
-       
+        // D1: the instructor may have only one attempt per date, unless the other one is ABANDONED
         if (quizAttemptRepository.existsByInstructorAndAttemptDateAndStatusNot(
                 requestedInstructor.get(), quizAttempt.getAttemptDate(), AttemptStatus.ABANDONED)) {
             return "Instructor already grades an attempt on that date";
@@ -111,11 +115,17 @@ public class QuizAttemptService {
             return "The quiz attempt with that id does not exist";
         }
 
+        // E3: a quiz attempt that has result feedbacks cannot be deleted
+        if (resultFeedbackRepository.existsByQuizAttempt(existingQuizAttempt.get())) {
+            return "That quiz attempt has result feedbacks, delete them first";
+        }
+
         quizAttemptRepository.deleteById(id);
         return "Quiz attempt deleted successfully";
     }
 
-   
+    // Returns a message when the data is not acceptable, or null when it is fine.
+    // The 'date not in the past' rule is checked in saveQuizAttempt (D1), not here.
     private String validate(QuizAttempt quizAttempt) {
         if (quizAttempt.getAttemptDate() == null) {
             return "Quiz attempt date is required";
@@ -129,17 +139,17 @@ public class QuizAttemptService {
         return null;
     }
 
-   
+    // B2
     public List<QuizAttempt> getQuizAttemptsByStatus(AttemptStatus status) {
         return quizAttemptRepository.findByStatusOrderByAttemptDateAsc(status);
     }
 
-   
+    // B3
     public List<QuizAttempt> getQuizAttemptsBetween(LocalDate start, LocalDate end) {
         return quizAttemptRepository.findByAttemptDateBetweenOrderByAttemptDateAsc(start, end);
     }
 
-  
+    // D2: status flow  STARTED -> SUBMITTED or ABANDONED, SUBMITTED -> GRADED or ABANDONED
     public String updateQuizAttemptStatus(UUID id, AttemptStatus newStatus) {
         Optional<QuizAttempt> existingQuizAttempt = quizAttemptRepository.findById(id);
         if (existingQuizAttempt.isEmpty()) {

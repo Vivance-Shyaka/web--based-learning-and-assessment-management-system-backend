@@ -79,16 +79,19 @@ public class QuizAttemptController {
         if ("Quiz attempt deleted successfully".equals(message)) {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
+        if ("That quiz attempt has result feedbacks, delete them first".equals(message)) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
-  
+    // B2
     @GetMapping("/by-status")
     public ResponseEntity<List<QuizAttempt>> getQuizAttemptsByStatus(@RequestParam AttemptStatus status) {
         return new ResponseEntity<>(quizAttemptService.getQuizAttemptsByStatus(status), HttpStatus.OK);
     }
 
-  
+    // B3
     @GetMapping("/between")
     public ResponseEntity<List<QuizAttempt>> getQuizAttemptsBetween(
             @RequestParam String start, @RequestParam String end) {

@@ -86,7 +86,7 @@ public class LearnerService {
         return "Learner deleted successfully";
     }
 
- 
+    // Returns a message when the data is not acceptable, or null when it is fine.
     private String validate(Learner learner) {
         if (learner.getFirstName() == null || learner.getFirstName().isBlank()) {
             return "Learner first name is required";
@@ -103,12 +103,12 @@ public class LearnerService {
         return null;
     }
 
-
+    // B1
     public List<Learner> getLearnersByLastName(String lastName) {
         return learnerRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
     }
 
-  
+    // C4: empty Optional means the instructor does not exist
     public Optional<List<Learner>> getLearnersOfInstructor(UUID instructorId) {
         if (instructorRepository.findById(instructorId).isEmpty()) {
             return Optional.empty();

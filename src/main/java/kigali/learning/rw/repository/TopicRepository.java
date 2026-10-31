@@ -17,7 +17,7 @@ public interface TopicRepository extends JpaRepository<Topic, UUID> {
 
     boolean existsByNameIgnoreCaseAndIdNot(String name, UUID id);
 
-
+    // C3: JPQL, IS EMPTY on the instructors collection
     @Query("SELECT t FROM Topic t WHERE t.instructors IS EMPTY")
     List<Topic> findUnusedTopics();
 }
