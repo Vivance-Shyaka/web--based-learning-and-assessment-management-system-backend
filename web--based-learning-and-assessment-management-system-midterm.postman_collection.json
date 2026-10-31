@@ -1,0 +1,1178 @@
+{
+  "info": {
+    "_postman_id": "4d326b87-0689-4e98-af52-e38f23d1a864",
+    "name": "Mid Exam Project Test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54810394",
+    "_collection_link": "https://go.postman.co/collection/54810394-4d326b87-0689-4e98-af52-e38f23d1a864?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Seed Data",
+      "item": [
+        {
+          "name": "Topics",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Biology\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/topics/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "topics",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Courses",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"courseNumber\": 104, \"name\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/courses/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "courses",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Learners",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"firstName\": \"Kevin\", \"lastName\": \"Ndayisaba\", \"learnerNumber\": \"LRN-0095\", \"email\": \"kevin.ndayisaba@gmail.com\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/learners/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "learners",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Instructors",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstName\": \"Eric\",\r\n  \"lastName\": \"Habimana\",\r\n  \"email\": \"eric.habimana@gmail.com\",\r\n  \"course\": {\"id\": \"748b88ae-c0fa-43f0-a70e-39b7f94bd0bf\"}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/instructors/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "instructors",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Quiz-Attempt",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"attemptDate\": \"2026-11-24\", \"status\": \"STARTED\", \"quizTitle\": \"Vocabulary Quiz\", \"totalQuestions\": 15,\r\n \"learner\": {\"id\": \"43d65ede-b24b-44cd-9cbe-d4475826336b\"}, \"instructor\": {\"id\": \"6de08878-09f0-4dc0-9928-9affd06d547f\"}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part A",
+      "item": [
+        {
+          "name": "A2-1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Physics\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/topics/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "topics",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2-2",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "A2-3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/topics/493c7c9f-fbe2-4321-82b5-30b91f8fe929",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "topics",
+                "493c7c9f-fbe2-4321-82b5-30b91f8fe929"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2-4",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\t{\"name\": \"Algebra Advanced\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/topics/update/493c7c9f-fbe2-4321-82b5-30b91f8fe929",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "topics",
+                "update",
+                "493c7c9f-fbe2-4321-82b5-30b91f8fe929"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2-5",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\t{\"name\": \"Algebra Advanced\"}"
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/topics/delete/96468429-68f6-407a-aa6d-b165de384ab7",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "topics",
+                "delete",
+                "96468429-68f6-407a-aa6d-b165de384ab7"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part B",
+      "item": [
+        {
+          "name": "B1-1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/learners/by-last-name?lastName=shyaka",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "learners",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "shyaka"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B1-2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/learners/by-last-name?lastName=SHYAKA",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "learners",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "SHYAKA"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B1-3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/learners/by-last-name?lastName=",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "learners",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B2-1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/by-status?status=STARTED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "by-status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "STARTED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B2-2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/by-status?status=GRADED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "by-status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "GRADED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B3-1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/between?start=2026-10-01&end=2026-10-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2026-10-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B3-2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/between?start=2026-10-20&end=2026-10-20",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2026-10-20"
+                },
+                {
+                  "key": "end",
+                  "value": "2026-10-20"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part C",
+      "item": [
+        {
+          "name": "C1-1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/instructors/by-topic?name=algebra advanced",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "instructors",
+                "by-topic"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "algebra advanced"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C1-2(case ignored)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/instructors/by-topic?name=ALGEBRA ADVANCED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "instructors",
+                "by-topic"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "ALGEBRA ADVANCED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C2-showing  a free course",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/courses/free",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "courses",
+                "free"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C3-Showing unused course",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/topics/unused",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "topics",
+                "unused"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C4",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/learners/of-instructor/6999f210-14a7-4f35-b3aa-2bb7bd3d2b35",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "learners",
+                "of-instructor",
+                "6999f210-14a7-4f35-b3aa-2bb7bd3d2b35"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C4-test using un existed id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/learners/of-instructor/6999f210-14a7-4f35-b3aa-2bb7b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "learners",
+                "of-instructor",
+                "6999f210-14a7-4f35-b3aa-2bb7b"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part D",
+      "item": [
+        {
+          "name": "D1-Checking if we can save with day in past",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"attemptDate\": \"2020-01-01\",\r\n  \"status\": \"GRADED\",\r\n  \"quizTitle\": \"Introduction to web development\",\r\n  \"totalQuestions\": 10,\r\n  \"learner\": {\"id\": \"43d65ede-b24b-44cd-9cbe-d4475826336b\"},\r\n  \"instructor\": {\"id\": \"6de08878-09f0-4dc0-9928-9affd06d547f\"}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D2-checking status flow",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"attemptDate\": \"2027-01-01\",\r\n  \"status\": \"\",\r\n  \"quizTitle\": \"Introduction to web development\",\r\n  \"totalQuestions\": 10,\r\n  \"learner\": {\"id\": \"43d65ede-b24b-44cd-9cbe-d4475826336b\"},\r\n  \"instructor\": {\"id\": \"6de08878-09f0-4dc0-9928-9affd06d547f\"}\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/28a31b36-a707-4dca-b278-17f32e943bb4/status?status=GRADED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "28a31b36-a707-4dca-b278-17f32e943bb4",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "GRADED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D2-checking if it can change from submitted to graded",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"attemptDate\": \"2027-01-01\",\r\n  \"status\": \"\",\r\n  \"quizTitle\": \"Introduction to web development\",\r\n  \"totalQuestions\": 10,\r\n  \"learner\": {\"id\": \"43d65ede-b24b-44cd-9cbe-d4475826336b\"},\r\n  \"instructor\": {\"id\": \"6de08878-09f0-4dc0-9928-9affd06d547f\"}\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/9756051b-7b4e-49c4-a36c-8a7268faafb8/status?status=GRADED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "9756051b-7b4e-49c4-a36c-8a7268faafb8",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "GRADED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D3-checking if i can add a topic to an instructor and keep what was there before",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/instructors/6de08878-09f0-4dc0-9928-9affd06d547f/topics/0a3c8498-cae5-4114-bbcd-62acef3b3117",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "instructors",
+                "6de08878-09f0-4dc0-9928-9affd06d547f",
+                "topics",
+                "0a3c8498-cae5-4114-bbcd-62acef3b3117"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D4-checking if we can change an instructor's course",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/instructors/6de08878-09f0-4dc0-9928-9affd06d547f/course?courseNumber=104",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "instructors",
+                "6de08878-09f0-4dc0-9928-9affd06d547f",
+                "course"
+              ],
+              "query": [
+                {
+                  "key": "courseNumber",
+                  "value": "104"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D4-check if course can not be taken by another instructor",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/instructors/c8b2ebd1-f9a5-4513-8562-7061c363ad8d/course?courseNumber=101",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "instructors",
+                "c8b2ebd1-f9a5-4513-8562-7061c363ad8d",
+                "course"
+              ],
+              "query": [
+                {
+                  "key": "courseNumber",
+                  "value": "101"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part E",
+      "item": [
+        {
+          "name": "E1-1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"questionArea\": \"HTML forms\", \"comment\": \"Good grasp of input types, revise validation\", \"marks\": 8}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/result-feedbacks/save?quizAttemptId=b5d1e6b7-eb40-4029-acb1-a7bcfdeaff48",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "result-feedbacks",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "quizAttemptId",
+                  "value": "b5d1e6b7-eb40-4029-acb1-a7bcfdeaff48"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E1-2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"questionArea\": \"CSS layout\", \"comment\": \"Clean use of flexbox\", \"marks\": 9}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/result-feedbacks/save?quizAttemptId=b5d1e6b7-eb40-4029-acb1-a7bcfdeaff48",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "result-feedbacks",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "quizAttemptId",
+                  "value": "b5d1e6b7-eb40-4029-acb1-a7bcfdeaff48"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E1-3",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "E2-1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/result-feedbacks/learner/LRN-0093",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "result-feedbacks",
+                "learner",
+                "LRN-0093"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3-1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"attemptDate\": \"2027-04-01\", \"quizTitle\": \"E3 Test\", \"totalQuestions\": 10, \"learner\": {\"id\": \"43d65ede-b24b-44cd-9cbe-d4475826336b\"}, \"instructor\": {\"id\": \"6de08878-09f0-4dc0-9928-9affd06d547f\"}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3-2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"attemptDate\": \"2027-04-01\", \"quizTitle\": \"E3 Test\", \"totalQuestions\": 10, \"learner\": {\"id\": \"43d65ede-b24b-44cd-9cbe-d4475826336b\"}, \"instructor\": {\"id\": \"6de08878-09f0-4dc0-9928-9affd06d547f\"}}"
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/d49a6330-ec48-4f14-8b82-94145a4cfd6f/status?status=SUBMITTED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "d49a6330-ec48-4f14-8b82-94145a4cfd6f",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "SUBMITTED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3-3",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"questionArea\": \"E3 area\", \"comment\": \"temp\", \"marks\": 5}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/result-feedbacks/save?quizAttemptId=59a6ebc1-72aa-48bf-aa85-f900e84c13c3\t",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "result-feedbacks",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "quizAttemptId",
+                  "value": "59a6ebc1-72aa-48bf-aa85-f900e84c13c3\t"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3-4",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"questionArea\": \"E3 area\", \"comment\": \"temp\", \"marks\": 5}"
+            },
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/delete/b5d1e6b7-eb40-4029-acb1-a7bcfdeaff48\t",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "delete",
+                "b5d1e6b7-eb40-4029-acb1-a7bcfdeaff48\t"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part F",
+      "item": [
+        {
+          "name": "F1-1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/stats/by-status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "stats",
+                "by-status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "F2- cancel a day",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/cancel-day?instructorId=6999f210-14a7-4f35-b3aa-2bb7bd3d2b35&date=2026-10-05",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "cancel-day"
+              ],
+              "query": [
+                {
+                  "key": "instructorId",
+                  "value": "6999f210-14a7-4f35-b3aa-2bb7bd3d2b35"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-10-05"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bonus",
+      "item": [
+        {
+          "name": "dashbord summary of whole system",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Getting all quiz attempt we have to see all pages we have",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listing only 5 content in 11 total element(Pagination)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8087/api/quiz-attempts/page?page=0&size=5&sort=attemptDate,desc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8087",
+              "path": [
+                "api",
+                "quiz-attempts",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "attemptDate,desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
